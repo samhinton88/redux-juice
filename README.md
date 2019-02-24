@@ -67,5 +67,14 @@ const anagramSchema = {
 
 Custom functions use the signature `(existingValue, incomingValue, index) => {return /* something immutable */}`
 
+```
+const mirrorSchema = {
+  reversableStr: { type: String, func: { name: 'REVERSE', func: val => val.split('').reverse().join('') }}
+}
 
-
+const mirrorReducer = combineReducers(juice(mirrorSchema, 'mirror'));
+```
+Will allow: 
+```
+dispatch({ type: 'MIRROR_REVERSIBLESTR_REVERSE' };
+```
