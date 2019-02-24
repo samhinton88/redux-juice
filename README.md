@@ -5,11 +5,15 @@ A simple, lightweight utility to for building normalised business objects in Red
 
 Given an object schema, `juice` returns two reducers: `byId` and `all`.
 
+## Instalation
+
+With npm: `npm install --save redux-juice`
+
 
 ## Basic Usage
 
 ```
-import juice from 'juice';
+import juice from 'redux-juice';
 import { combineReducers } from 'redux';
 
 const blogSchema = {
