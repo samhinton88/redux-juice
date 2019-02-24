@@ -1,6 +1,10 @@
 # Juice
 
-A simple, lightweight utility to for building business objects in Redux state.
+
+A simple, lightweight utility to for building normalised business objects in Redux state.
+
+Given an object schema, `juice` returns two reducers: `byId` and `all`.
+
 
 ## Basic Usage
 
@@ -21,8 +25,11 @@ const userReducer = combineReducers({ byId, all });
 The above will generate reducers which respond to type: `${resourceName}_${attributeName}_${action}`.
 
 `dispatch({ type: BLOG_ADD, payload: 'uniqueID' });`
+
 `dispatch({ type: BLOG_REMOVE, payload: 'uniqueId' });`
+
 `dispatch({ type: BLOG_TITLE_UPDATE, payload: 'New Blog Title' });`
+
 
 ## Reduction Functions
 
