@@ -21,3 +21,27 @@ const userReducer = combineReducers({ byId, all });
 The above will generate reducers which respond to type: `${resourceName}_${attributeName}_${action}`.
 
 `dispatch({ type: BLOG_TITLE_UPDATE, payload: 'New Blog Title' });`
+
+```
+const picSchema = {
+  likeCount: { type: Number, func: 'INC' },
+}
+
+```
+
+Attributes can be assigned functions to describe transformations to be applied in reducer logic.
+
+Juice comes with a number of built in functions which cover a range of commonly required transformations.
+
+`INCREMENT DECREMENT APPEND...`
+
+Custom functions may also be used:
+
+```
+import shuffle from 'lodash.shuffle';
+
+const anagramSchema = {
+  content: { type: String, func: { name: 'randomise', func: val => shuffle(val.split('')).join('') } }
+};
+
+```
