@@ -53,11 +53,9 @@ module.exports = (schema, rawName) => {
   if(!rawName) throw new Error('Please provide a name for your model');
 
   const name = rawName.toUpperCase();
-
-
-
+  
   const funcRepo = Object.keys(schema).reduce((acc, attr) => {
-
+    // scope by resource name and attribute name
     const scope = [name, attr].map(invert('toUpperCase')).join('_');
 
     let config = schema[attr];
@@ -71,6 +69,7 @@ module.exports = (schema, rawName) => {
     if(func) {
 
       if(Array.isArray(func)) {
+        // more than one function provided
   
         func.forEach((f) => {
 
@@ -80,7 +79,7 @@ module.exports = (schema, rawName) => {
             acc[`${scope}_${f}`] = attrReducer(functionToReduce, attr);
 
           } else if (typeof f === 'object') {
-
+            // custom function
             acc[`${scope}_${f.name}`] = attrReducer(f.func, attr);
 
           } else {
@@ -90,13 +89,15 @@ module.exports = (schema, rawName) => {
           }
         })
       } else {
+        // single function provided
+
         if (updateFuncs[func]) {
           const functionToReduce = updateFuncs[func];
           
           acc[`${scope}_${func}`] = attrReducer(functionToReduce, attr);
 
         } else if (typeof func === 'object') {
-
+          // custom function
           acc[`${scope}_${func.name}`] = attrReducer(func.func, attr);
 
         } else {
@@ -104,7 +105,7 @@ module.exports = (schema, rawName) => {
         }
       }
     } else {
-      // only a type is provided
+      // only a type is provided - provide update reduction
       acc[`${scope}_UPDATE`] = attrReducer((_attr, val) => val, attr)
 
     }
