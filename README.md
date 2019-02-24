@@ -7,7 +7,7 @@ Given an object schema, `juice` returns two reducers: `byId` and `all`.
 
 `byId` is an object where resources are indexed by a unique id, `all` being an array of all resource ids of that type.
 
-## Instalation
+## Installation
 
 With npm: `npm install --save redux-juice`
 
