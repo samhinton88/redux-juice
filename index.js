@@ -10,7 +10,6 @@ const updateFuncs = () => ({
 })
 
 const attrReducer = (cb, at) => (state, action) => {
-  console.log('in attr reducer',state, action)
   const { id, index, value } = action.payload;
 
   const resource = state[id];
@@ -85,11 +84,8 @@ export default (resource, rawName, ) => {
     return acc;
   }, {});
 
-  console.log(funcRepo)
-
   const byId = (state={}, action) => funcRepo[action.type] ? funcRepo[action.type](state, action) : state;
   const all = (state=[], action) => { 
-    console.log('action in all reducer',action)
     switch(action.type) {
       case `${name}_ADD`: return [...state, action.payload.id];
       case `${name}_REMOVE`: return state.filter(id => id !== action.payload.id)
