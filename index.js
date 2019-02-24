@@ -1,12 +1,13 @@
 const invert = method => arg => arg[method]();
 
 const updateFuncs = () => ({
-  prepend: (arr, val) => [val, ...arr],
-  append: (arr, val) => [...arr, val],
-  insert: (arr, val, index)=> [...arr.slice(0, index), val, ...arr.slice(index,)],
-  replace: (arr, val, index) => [...arr.slice(0, index), val, ...arr.slice(index + 1,)],
-  toggle: bool => !bool,
-  INC: (val) => val + 1
+  PREPEND: (arr, val) => [val, ...arr],
+  APPEND: (arr, val) => [...arr, val],
+  INSERT: (arr, val, index)=> [...arr.slice(0, index), val, ...arr.slice(index,)],
+  REPLACE: (arr, val, index) => [...arr.slice(0, index), val, ...arr.slice(index + 1,)],
+  TOGGLE: bool => !bool,
+  INCREMENT: val => val + 1,
+  DECREMENT: val => val - 1
 })
 
 const attrReducer = (cb, at) => (state, action) => {
@@ -23,7 +24,6 @@ const attrReducer = (cb, at) => (state, action) => {
     }
   }
 };
-
 
 
 /**
@@ -44,6 +44,8 @@ const attrReducer = (cb, at) => (state, action) => {
  * 
  * const userReducer = combineReducers({ byId, all });
  * 
+ * 
+ * 
  */
 export default (resource, rawName, ) => {
   const name = rawName.toUpperCase();
@@ -52,10 +54,10 @@ export default (resource, rawName, ) => {
 
     const scope = [name, attr].map(invert('toUpperCase')).join('_');
 
-    const config = resource[attr];
+    let config = resource[attr];
 
     if(Array.isArray(config)) {
-
+      config = config[0];
     }
 
     const { func } = config;
