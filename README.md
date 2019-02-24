@@ -1,4 +1,4 @@
-# Juice
+# Redux-Juice
 
 
 A simple, lightweight utility to for building normalised business objects in Redux state.
