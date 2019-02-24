@@ -22,9 +22,29 @@ const attrReducer = (cb, at) => (state, action) => {
       [at]: cb(attr, value, index),
     }
   }
-}
+};
 
 
+
+/**
+ * A utility which takes a resource schema and returns an object containing
+ * reducer functions.
+ * 
+ * 
+ * import juice from 'juice';
+ * 
+ * const userSchema = {
+ *  name: String,
+ *  age: Number,
+ *  likeCount: { type: Number, func: 'INC' },
+ *  
+ * };
+ * 
+ * const { byId, all } = juice(userSchema, 'user');
+ * 
+ * const userReducer = combineReducers({ byId, all });
+ * 
+ */
 export default (resource, rawName, ) => {
   const name = rawName.toUpperCase();
 

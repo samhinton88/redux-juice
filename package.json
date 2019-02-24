@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/samhinton88/redux-juice/issues"
   },
-  "homepage": "https://github.com/samhinton88/redux-juice#readme"
+  "homepage": "https://github.com/samhinton88/redux-juice#readme",
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
 }
