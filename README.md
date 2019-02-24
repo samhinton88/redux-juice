@@ -3,7 +3,9 @@
 
 A simple, lightweight utility to for building normalised business objects in Redux state.
 
-Given an object schema, `juice` returns two reducers: `byId` and `all`. `byId` being an object where resources are indexed by a unique id, `all` being an array of all resources of that type in the store.
+Given an object schema, `juice` returns two reducers: `byId` and `all`. 
+
+`byId` is an object where resources are indexed by a unique id, `all` being an array of all resource ids of that type.
 
 ## Instalation
 
