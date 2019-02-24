@@ -112,7 +112,7 @@ module.exports = (schema, rawName) => {
     acc[`${name}_ADD`] = (state, action) => ({...state, [action.payload.id]: action.payload })
 
     acc[`${name}_REMOVE`] = (state, action) => {
-      delete state[action.payload.id]
+      delete state[action.payload.id];
       return { ...state };
     }
 

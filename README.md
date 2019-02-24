@@ -28,9 +28,9 @@ const userReducer = combineReducers({ byId, all });
 
 The above will generate reducers which respond to type: `${resourceName}_${attributeName}_${action}`.
 
-`dispatch({ type: BLOG_ADD, payload: 'uniqueID' });`
+`dispatch({ type: BLOG_ADD, payload: { id:'uniqueID' } });`
 
-`dispatch({ type: BLOG_REMOVE, payload: 'uniqueId' });`
+`dispatch({ type: BLOG_REMOVE, payload: { id:'uniqueID' } });`
 
 `dispatch({ type: BLOG_TITLE_UPDATE, payload: 'New Blog Title' });`
 
