@@ -82,7 +82,7 @@ Custom functions use the signature `(existingValue, incomingValue, index) => {re
 
 ```
 const mirrorSchema = {
-  reversableStr: { type: String, func: { name: 'REVERSE', func: val => val.split('').reverse().join('') }}
+  reversibleStr: { type: String, func: { name: 'REVERSE', func: val => val.split('').reverse().join('') }}
 }
 
 const mirrorReducer = combineReducers(juice(mirrorSchema, 'mirror'));
