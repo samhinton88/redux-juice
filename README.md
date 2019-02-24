@@ -89,5 +89,5 @@ const mirrorReducer = combineReducers(juice(mirrorSchema, 'mirror'));
 ```
 Will allow: 
 ```
-dispatch({ type: 'MIRROR_REVERSIBLESTR_REVERSE' };
+dispatch({ type: 'MIRROR_REVERSIBLESTR_REVERSE', payload: { id: 'resourceId' } };
 ```
