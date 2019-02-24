@@ -24,7 +24,7 @@ The above will generate reducers which respond to type: `${resourceName}_${attri
 
 ```
 const picSchema = {
-  likeCount: { type: Number, func: 'INC' },
+  likeCount: { type: Number, func: 'INCREMENT' },
 }
 
 ```
@@ -33,7 +33,17 @@ Attributes can be assigned functions to describe transformations to be applied i
 
 Juice comes with a number of built in functions which cover a range of commonly required transformations.
 
-`INCREMENT DECREMENT APPEND...`
+### Numbers
+`INCREMENT`
+`DECREMENT` 
+### Arrays
+`APPEND`
+`PREPEND`
+`REPLACE`
+`REMOVE`
+`INSERT`
+### Boolean
+`TOGGLE`
 
 Custom functions may also be used:
 
