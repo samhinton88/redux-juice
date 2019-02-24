@@ -45,3 +45,8 @@ const anagramSchema = {
 };
 
 ```
+
+Custom functions use the signature `(existingValue, incomingValue, index) => {return /* something immutable */}`
+
+
+
