@@ -1,14 +1,15 @@
 const invert = method => arg => arg[method]();
 
-const updateFuncs = () => ({
+const updateFuncs = {
   PREPEND: (arr, val) => [val, ...arr],
   APPEND: (arr, val) => [...arr, val],
   INSERT: (arr, val, index)=> [...arr.slice(0, index), val, ...arr.slice(index,)],
   REPLACE: (arr, val, index) => [...arr.slice(0, index), val, ...arr.slice(index + 1,)],
+  REMOVE: (arr, _val, index) => [...arr.slice(0, index), ...arr.slice(index + 1,)],
   TOGGLE: bool => !bool,
   INCREMENT: val => val + 1,
   DECREMENT: val => val - 1
-})
+}
 
 const attrReducer = (cb, at) => (state, action) => {
   const { id, index, value } = action.payload;
@@ -44,17 +45,22 @@ const attrReducer = (cb, at) => (state, action) => {
  * 
  * const userReducer = combineReducers({ byId, all });
  * 
- * 
- * 
+ * juice
+ * @param {object} schema model schema
+ * @param {string} rawName model name
  */
-export default (resource, rawName, ) => {
+module.exports = (schema, rawName) => {
+  if(!rawName) throw new Error('Please provide a name for your model');
+
   const name = rawName.toUpperCase();
 
-  const funcRepo = Object.keys(resource).reduce((acc, attr) => {
+
+
+  const funcRepo = Object.keys(schema).reduce((acc, attr) => {
 
     const scope = [name, attr].map(invert('toUpperCase')).join('_');
 
-    let config = resource[attr];
+    let config = schema[attr];
 
     if(Array.isArray(config)) {
       config = config[0];
@@ -66,22 +72,26 @@ export default (resource, rawName, ) => {
 
       if(Array.isArray(func)) {
   
-        func.forEach((func) => {
+        func.forEach((f) => {
 
-          if (updateFuncs()[func]) {
-            const functionToReduce = updateFuncs()[func];
+          if (updateFuncs[f]) {
+            const functionToReduce = updateFuncs[f];
             
-            acc[`${scope}_${func}`] = attrReducer(functionToReduce, attr);
+            acc[`${scope}_${f}`] = attrReducer(functionToReduce, attr);
 
-          } else if (typeof func === 'object') {
+          } else if (typeof f === 'object') {
 
-            acc[`${scope}_${func.name}`] = attrReducer(func.func, attr);
+            acc[`${scope}_${f.name}`] = attrReducer(f.func, attr);
+
+          } else {
+
+            throw new Error(`${f} is not a known function`)
 
           }
         })
       } else {
-        if (updateFuncs()[func]) {
-          const functionToReduce = updateFuncs()[func];
+        if (updateFuncs[func]) {
+          const functionToReduce = updateFuncs[func];
           
           acc[`${scope}_${func}`] = attrReducer(functionToReduce, attr);
 
@@ -89,6 +99,8 @@ export default (resource, rawName, ) => {
 
           acc[`${scope}_${func.name}`] = attrReducer(func.func, attr);
 
+        } else {
+          throw new Error(`${func} is not a known function`)
         }
       }
     } else {
