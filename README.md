@@ -1,7 +1,6 @@
 # Redux-Juice
 
-
-A simple, lightweight utility to for building normalised business objects in Redux state.
+> A simple, lightweight utility to for building normalised business objects in Redux state.
 
 Given an object schema, `juice` returns two reducers: `byId` and `all`. 
 
@@ -9,12 +8,13 @@ Given an object schema, `juice` returns two reducers: `byId` and `all`.
 
 ## Installation
 
-With npm: `npm install --save redux-juice`
-
+```console
+npm install --save redux-juice
+```
 
 ## Basic Usage
 
-```
+```javascript
 import juice from 'redux-juice';
 import { combineReducers } from 'redux';
 
@@ -39,7 +39,7 @@ The above will generate reducers which respond to type: `${resourceName}_${attri
 
 ## Reduction Functions
 
-```
+```javascript
 const picSchema = {
   likeCount: { type: Number, func: 'INCREMENT' },
 }
@@ -70,7 +70,7 @@ Actions should be constructed in the following pattern:
 ## Custom Functions
 Custom functions may also be used:
 
-```
+```javascript
 import shuffle from 'lodash.shuffle';
 
 const anagramSchema = {
@@ -80,7 +80,7 @@ const anagramSchema = {
 
 Custom functions use the signature `(existingValue, incomingValue, index) => {return /* something immutable */}`
 
-```
+```javascript
 const mirrorSchema = {
   reversibleStr: { type: String, func: { name: 'REVERSE', func: val => val.split('').reverse().join('') }}
 }
@@ -88,6 +88,6 @@ const mirrorSchema = {
 const mirrorReducer = combineReducers(juice(mirrorSchema, 'mirror'));
 ```
 Will allow: 
-```
+```javascript
 dispatch({ type: 'MIRROR_REVERSIBLESTR_REVERSE', payload: { id: 'resourceId' } };
 ```
