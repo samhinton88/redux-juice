@@ -30,7 +30,7 @@ const userReducer = combineReducers({ byId, all });
 
 The above will generate reducers which respond to type: `${resourceName}_${attributeName}_${action}`.
 
-```javascript
+```js
 dispatch({ type: BLOG_ADD, payload: { id:'uniqueID' } });
 
 dispatch({ type: BLOG_REMOVE, payload: { id:'uniqueID' } });
@@ -41,7 +41,7 @@ dispatch({ type: BLOG_TITLE_UPDATE, payload: 'New Blog Title' });
 
 ## Reduction Functions
 
-```javascript
+```js
 const picSchema = {
   likeCount: { type: Number, func: 'INCREMENT' },
 }
@@ -64,7 +64,7 @@ Juice comes with a number of built in functions which cover a range of commonly 
 `TOGGLE`
 
 Actions should be constructed in the following pattern:
-```javascript
+```js
 { type: TYPE, payload: { id: 'unique id', value: 'some value', index: 0 } }
 ```
 
@@ -74,7 +74,7 @@ Actions should be constructed in the following pattern:
 ## Custom Functions
 Custom functions may also be used:
 
-```javascript
+```js
 import shuffle from 'lodash.shuffle';
 
 const anagramSchema = {
@@ -84,7 +84,7 @@ const anagramSchema = {
 
 Custom functions use the signature `(existingValue, incomingValue, index) => {return /* something immutable */}`
 
-```javascript
+```js
 const mirrorSchema = {
   reversibleStr: { type: String, func: { name: 'REVERSE', func: val => val.split('').reverse().join('') }}
 }
@@ -92,6 +92,6 @@ const mirrorSchema = {
 const mirrorReducer = combineReducers(juice(mirrorSchema, 'mirror'));
 ```
 Will allow: 
-```javascript
+```js
 dispatch({ type: 'MIRROR_REVERSIBLESTR_REVERSE', payload: { id: 'resourceId' } };
 ```
