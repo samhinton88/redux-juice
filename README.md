@@ -9,12 +9,12 @@ Given an object schema, `juice` returns two reducers: `byId` and `all`.
 ## Installation
 
 ```console
-npm install --save redux-juice
+> npm install --save redux-juice
 ```
 
 ## Basic Usage
 
-```javascript
+```js
 import juice from 'redux-juice';
 import { combineReducers } from 'redux';
 
@@ -30,11 +30,13 @@ const userReducer = combineReducers({ byId, all });
 
 The above will generate reducers which respond to type: `${resourceName}_${attributeName}_${action}`.
 
-`dispatch({ type: BLOG_ADD, payload: { id:'uniqueID' } });`
+```javascript
+dispatch({ type: BLOG_ADD, payload: { id:'uniqueID' } });
 
-`dispatch({ type: BLOG_REMOVE, payload: { id:'uniqueID' } });`
+dispatch({ type: BLOG_REMOVE, payload: { id:'uniqueID' } });
 
-`dispatch({ type: BLOG_TITLE_UPDATE, payload: 'New Blog Title' });`
+dispatch({ type: BLOG_TITLE_UPDATE, payload: 'New Blog Title' });
+```
 
 
 ## Reduction Functions
@@ -62,7 +64,9 @@ Juice comes with a number of built in functions which cover a range of commonly 
 `TOGGLE`
 
 Actions should be constructed in the following pattern:
-`{ type: TYPE, payload: { id: 'unique id', value: 'some value', index: 0 } }`
+```javascript
+{ type: TYPE, payload: { id: 'unique id', value: 'some value', index: 0 } }
+```
 
 
 `index` being relevant to actions which should change arrays.
