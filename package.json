@@ -20,5 +20,11 @@
     "jest": "^24.1.0",
     "redux": "^4.0.1"
   },
-  "keywords": ["redux", "state", "state-management", "immutble", "react"]
+  "keywords": [
+    "redux",
+    "state",
+    "state-management",
+    "immutable",
+    "react"
+  ]
 }
