@@ -56,7 +56,7 @@ module.exports = (schema, rawName) => {
 
   // get default values if any
   const initial = Object.keys(schema)
-    .filter(at => schema[at].default)
+    .filter(at => schema[at].default !== undefined)
     .reduce((acc, at) => ({ ...acc, [at]: schema[at].default }), {})
   
   const funcRepo = Object.keys(schema).reduce((acc, attr) => {
