@@ -10,7 +10,7 @@ describe('juice', () => {
       name: String,
       toReverse: { type: String, func: { name: 'REVERSE', func: val => val.split('').reverse().join('') }},
       isValid: { type: Boolean, func: 'TOGGLE' },
-      count: { type: Number, func: ['INCREMENT', 'DECREMENT', { name: 'ADD5', func: val => val + 5 } ]},
+      count: { type: Number, func: ['INCREMENT', 'DECREMENT', { name: 'ADD5', func: val => val + 5 } ], default: 0 },
       packets: [{ type: String, func: ['APPEND', 'PREPEND', 'INSERT', 'REPLACE', 'REMOVE']}]
     },
     badSchema = {
@@ -52,6 +52,12 @@ describe('juice', () => {
     it('allows the dispatch of an ADD type', () => {
       store.dispatch({ type: 'TEST_ADD', payload: { id: 1 } })
       expect(store.getState().all.length).toEqual(2)
+    });
+
+    it('allows the dispatch of an ADD type with a default value', () => {
+      store.dispatch({ type: 'TEST_ADD', payload: { id: 1 } })
+      expect(store.getState().all.length).toEqual(2)
+      expect(objWithId(1).count).toEqual(0);
     });
 
     it('allows the dispatch of a REMOVE type', () => {
