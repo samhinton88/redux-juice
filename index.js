@@ -37,7 +37,7 @@ const attrReducer = (cb, at) => (state, action) => {
  * const userSchema = {
  *  name: String,
  *  age: Number,
- *  likeCount: { type: Number, func: 'INC' },
+ *  likeCount: { type: Number, func: 'INC', default: 0 },
  *  
  * };
  * 
@@ -53,6 +53,11 @@ module.exports = (schema, rawName) => {
   if(!rawName) throw new Error('Please provide a name for your model');
 
   const name = rawName.toUpperCase();
+
+  // get default values if any
+  const initial = Object.keys(schema)
+    .filter(at => schema[at].default !== undefined)
+    .reduce((acc, at) => ({ ...acc, [at]: schema[at].default }), {})
   
   const funcRepo = Object.keys(schema).reduce((acc, attr) => {
     // scope by resource name and attribute name
@@ -109,7 +114,10 @@ module.exports = (schema, rawName) => {
       acc[`${scope}_UPDATE`] = attrReducer((_attr, val) => val, attr)
 
     }
-    acc[`${name}_ADD`] = (state, action) => ({...state, [action.payload.id]: action.payload })
+    acc[`${name}_ADD`] = (state, action) => ({
+      ...state,
+      [action.payload.id]: { ...initial, ...action.payload }
+    })
 
     acc[`${name}_REMOVE`] = (state, action) => {
       delete state[action.payload.id];

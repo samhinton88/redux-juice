@@ -43,7 +43,7 @@ dispatch({ type: BLOG_TITLE_UPDATE, payload: 'New Blog Title' });
 
 ```js
 const picSchema = {
-  likeCount: { type: Number, func: 'INCREMENT' },
+  likeCount: { type: Number, func: 'INCREMENT', default: 0 },
 }
 ```
 
