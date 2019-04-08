@@ -1,6 +1,6 @@
 # Redux-Juice
 
-> A simple, lightweight utility to for building normalised business objects in Redux state.
+> A simple, lightweight utility for building normalised business objects in Redux state.
 
 Given an object schema, `juice` returns two reducers: `byId` and `all`. 
 
